@@ -1,0 +1,103 @@
+class Solution {
+    public void merge(int[] nums1, int m, int[] nums2, int n) {
+        
+        int i = m-1;
+        int j= n-1;
+        int k = nums1.length-1;
+        while(j>=0){
+            if( i>=0 && nums1[i]>=nums2[j]){
+                nums1[k]=nums1[i];
+                i--;
+                k--;
+            }else{
+                nums1[k]=nums2[j];
+                j--;
+                k--;
+            }
+        }
+        
+    }
+}
+
+This Java code defines a method called merge that merges two sorted arrays nums1 and nums2 into a single sorted array.
+The result is stored in nums1. Here’s a step-by-step explanation along with a dry run example.
+
+#Inputs:
+nums1: A sorted array with enough space to hold elements from both nums1 and nums2.
+m: The number of actual elements in nums1 (excluding the extra space).
+nums2: A sorted array.
+n: The number of elements in nums2.
+
+#Pointers:
+i starts from the end of the actual elements in nums1 (m-1).
+j starts from the end of nums2 (n-1).
+k starts from the end of the total length of nums1.
+
+#Merging Process:
+The algorithm compares elements from the end of nums1 and nums2.
+It places the larger element at the end of nums1 (position k).
+It decrements the corresponding pointer (i, j, or k) after placing the element.
+This process continues until all elements from nums2 are merged into nums1.
+
+Dry Run Example
+Let's take an example to understand the dry run.
+
+Input:
+
+nums1 = [1, 2, 3, 0, 0, 0] (with extra space at the end)
+m = 3 (indicating first 3 elements are valid: [1, 2, 3])
+nums2 = [2, 5, 6]
+n = 3 (3 elements in nums2)
+
+Initial state:
+nums1 = [1, 2, 3, 0, 0, 0]
+nums2 = [2, 5, 6]
+m = 3, n = 3
+i = 2, j = 2, k = 5
+
+step 1:
+ Compare nums1[i] (3) and nums2[j] (6):
+-6 is larger. Place 6 at nums1[k].
+-Decrement j and k.
+
+nums1 = [1, 2, 3, 0, 0, 6]
+i = 2, j = 1, k = 4
+
+
+Step 2:
+Compare nums1[i] (3) and nums2[j] (5):
+5 is larger. Place 5 at nums1[k].
+Decrement j and k
+
+nums1 = [1, 2, 3, 0, 5, 6]
+i = 2, j = 0, k = 3
+
+Step 3:
+Compare nums1[i] (3) and nums2[j] (2):
+3 is larger. Place 3 at nums1[k].
+Decrement i and k.
+
+nums1 = [1, 2, 3, 3, 5, 6]
+i = 1, j = 0, k = 2
+
+Step 4:
+Compare nums1[i] (2) and nums2[j] (2):
+Both are equal. Place 2 from nums1 at nums1[k].
+Decrement i and k.
+
+nums1 = [1, 2, 2, 3, 5, 6]
+i = 0, j = 0, k = 1
+
+Step 5:
+Compare nums1[i] (1) and nums2[j] (2):
+2 is larger. Place 2 from nums2 at nums1[k].
+Decrement j and k.
+
+nums1 = [1, 2, 2, 3, 5, 6]
+i = 0, j = -1, k = 0
+
+Step 6:
+Since j is now less than 0, the process stops
+nums1 = [1, 2, 2, 3, 5, 6]
+
+the arrays nums1 and nums2 have been successfully merged into a single sorted array within nums1.
